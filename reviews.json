@@ -1,0 +1,118 @@
+{
+  "reviews": [
+    {
+      "professor": "Dr. John Smith",
+      "subject": "Introduction to Psychology",
+      "stars": 4,
+      "review": "Dr. Smith is knowledgeable and engaging. He makes complex topics easy to understand."
+    },
+    {
+      "professor": "Dr. Emily Johnson",
+      "subject": "Advanced Mathematics",
+      "stars": 5,
+      "review": "Dr. Johnson is an excellent professor. She provides clear explanations and encourages questions."
+    },
+    {
+      "professor": "Prof. Michael Brown",
+      "subject": "History of Art",
+      "stars": 3,
+      "review": "Prof. Brown is passionate about the subject, but his lectures can be a bit disorganized."
+    },
+    {
+      "professor": "Dr. Sarah Davis",
+      "subject": "Computer Science 101",
+      "stars": 4,
+      "review": "Dr. Davis is very approachable and always willing to help students outside of class."
+    },
+    {
+      "professor": "Prof. David Wilson",
+      "subject": "Organic Chemistry",
+      "stars": 2,
+      "review": "Prof. Wilson is knowledgeable, but his teaching style is difficult to follow."
+    },
+    {
+      "professor": "Dr. Jessica Martinez",
+      "subject": "Microeconomics",
+      "stars": 5,
+      "review": "Dr. Martinez makes economics fun and relatable. Highly recommend!"
+    },
+    {
+      "professor": "Prof. James Garcia",
+      "subject": "Philosophy",
+      "stars": 4,
+      "review": "Prof. Garcia encourages deep thinking and lively discussions in class."
+    },
+    {
+      "professor": "Dr. Patricia Rodriguez",
+      "subject": "Data Structures",
+      "stars": 5,
+      "review": "Dr. Rodriguez is fantastic! Her teaching methods are clear and effective."
+    },
+    {
+      "professor": "Prof. Daniel Lee",
+      "subject": "Modern Literature",
+      "stars": 3,
+      "review": "Prof. Lee has great insights but often goes off-topic."
+    },
+    {
+      "professor": "Dr. Laura Walker",
+      "subject": "Biochemistry",
+      "stars": 4,
+      "review": "Dr. Walker is very supportive and helps students grasp difficult concepts."
+    },
+    {
+      "professor": "Prof. Matthew Hall",
+      "subject": "Statistics",
+      "stars": 2,
+      "review": "Prof. Hall's lectures are too fast-paced and hard to keep up with."
+    },
+    {
+      "professor": "Dr. Angela Young",
+      "subject": "World History",
+      "stars": 5,
+      "review": "Dr. Young is a brilliant storyteller and makes history come alive."
+    },
+    {
+      "professor": "Prof. Charles Hernandez",
+      "subject": "Environmental Science",
+      "stars": 3,
+      "review": "Prof. Hernandez is passionate but can be unstructured in his lectures."
+    },
+    {
+      "professor": "Dr. Karen King",
+      "subject": "Linear Algebra",
+      "stars": 4,
+      "review": "Dr. King is approachable and provides excellent resources for study."
+    },
+    {
+      "professor": "Prof. Robert Wright",
+      "subject": "Business Management",
+      "stars": 5,
+      "review": "Prof. Wright offers practical insights and real-world examples."
+    },
+    {
+      "professor": "Dr. Lisa Scott",
+      "subject": "Digital Media",
+      "stars": 3,
+      "review": "Dr. Scott has great content, but the class could use more structure."
+    },
+    {
+      "professor": "Prof. George Adams",
+      "subject": "Sociology",
+      "stars": 4,
+      "review": "Prof. Adams fosters a welcoming environment for discussion and debate."
+    },
+    {
+      "professor": "Dr. Sandra Nelson",
+      "subject": "Machine Learning",
+      "stars": 5,
+      "review": "Dr. Nelson is an expert in her field and explains complex concepts clearly."
+    },
+    {
+      "professor": "Prof. Thomas Baker",
+      "subject": "Ethics",
+      "stars": 3,
+      "review": "Prof. Baker is knowledgeable but can be too theoretical at times."
+    }
+  ]
+}
