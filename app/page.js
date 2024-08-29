@@ -1,95 +1,134 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import { Box, Button, Stack, TextField } from "@mui/material";
+import { useState } from "react";
 
 export default function Home() {
+  const [messages, setMessages] = useState([
+    {
+      role: "assistant",
+      content:
+        "Hi, I'm the RateMyProfessor support assistant. How can I help you today?",
+    },
+  ]);
+
+  const [message, setMessage] = useState("");
+
+  const sendMessage = async () => {
+    setMessages((messages) => [
+      ...messages,
+      { role: "user", content: message },
+      { role: "assistant", content: "" },
+    ]);
+
+    setMessage("");
+
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([...messages, { role: "user", content: message }]),
+    });
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+
+    let result = "";
+    let done = false;
+
+    while (!done) {
+      const { value, done: isDone } = await reader.read();
+      done = isDone;
+
+      if (value) {
+        const text = decoder.decode(value, { stream: true });
+
+        setMessages((messages) => {
+          let lastMessage = messages[messages.length - 1];
+          let otherMessages = messages.slice(0, messages.length - 1);
+          return [
+            ...otherMessages,
+            { ...lastMessage, content: lastMessage.content + text },
+          ];
+        });
+
+        result += text;
+      }
+    }
+    return result;
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <Box
+      width="100vw"
+      height="100vh"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      bgcolor="background.default" // Set a background color for the whole page
+    >
+      <Stack
+        flexDirection="column"
+        width="500px"
+        height="700px"
+        border="1px solid black"
+        padding={2}
+        spacing={3}
+        bgcolor="white" // Set a white background for the chat container
+        display="flex"
+      >
+        {/* Messages Display Area */}
+        <Box
+          flex="1" // This makes the Box grow to take available space
+          overflow="auto" // Allows scrolling if content overflows
+        >
+          {messages.map((message, index) => (
+            <Box
+              mt={2}
+              key={index}
+              display="flex"
+              justifyContent={
+                message.role === "assistant" ? "flex-start" : "flex-end"
+              }
+            >
+              <Box
+                bgcolor={
+                  message.role === "assistant"
+                    ? "primary.main"
+                    : "secondary.main"
+                } // Use light colors for better visibility
+                color="black" // Ensure text color contrasts with background
+                borderRadius={16}
+                padding={2}
+              >
+                {message.content}
+              </Box>
+            </Box>
+          ))}
+        </Box>
+
+        {/* Input and Send Button */}
+        <Stack
+          direction="row"
+          spacing={2}
+          mt={2}
+          // alignSelf="flex-end"
+        >
+          <TextField
+            label="Message"
+            fullWidth
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <Button
+            variant="contained"
+            onClick={sendMessage}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+            Send
+          </Button>
+        </Stack>
+      </Stack>
+    </Box>
   );
 }
